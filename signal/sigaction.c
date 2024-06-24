@@ -16,13 +16,20 @@ void sig_handler(int signo)
 
 void sigaction_handler(int signo, siginfo_t *infop, void *unused)
 {
-    printf("signo:%d si_code:%d\n", infop->si_signo, infop->si_code);
+    printf("signo:%d si_error:%d si_code:%d si_pid:%d si_uid:%d si_status:%d si_addr:%p\n",
+           infop->si_signo,
+           infop->si_errno,
+           infop->si_code,
+           infop->si_pid,
+           infop->si_uid,
+           infop->si_status,
+           infop->si_addr);
 }
 
 int main(int argc, char *argv[])
 {
     printf("[%d]hello, world\n", getpid());
-    printf("%d\n",SI_USER);
+    printf("%d\n", SI_USER);
 
     struct sigaction sa;
 
